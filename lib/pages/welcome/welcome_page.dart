@@ -20,7 +20,7 @@ class WelcomePage extends StatelessWidget {
               //Center PArt
               CenterPart(),
               // end part
-              // EndPart(),
+              EndPart(),
             ],
           ),
         ),
