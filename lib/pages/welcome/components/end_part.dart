@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/widgets/my_button.dart';
 
 class EndPart extends StatelessWidget {
   const EndPart({Key? key}) : super(key: key);
@@ -7,35 +8,9 @@ class EndPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MaterialButton(
+        MyButton(
           onPressed: () {},
-          height: 50,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(04),
-          ),
-          padding: EdgeInsets.all(0),
-          child: Ink(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff027f47),
-                    Color(0xff01a95c),
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(04)),
-            child: Container(
-              height: 50,
-              alignment: Alignment.center,
-              child: const Text(
-                "LOG IN",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
+          text: "LOG IN",
         ),
         SizedBox(
           height: 20,

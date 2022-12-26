@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/signup/components/signup_auth_provider.dart';
 import 'package:new_food_delivery/pages/signup/signup_page.dart';
+import 'package:new_food_delivery/widgets/my_button.dart';
+import 'package:new_food_delivery/widgets/my_button.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -9,15 +13,15 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  TextEditingController fullName = TextEditingController();
-  TextEditingController emailAddress = TextEditingController();
+  TextEditingController fullname = TextEditingController();
+  TextEditingController emailAdress = TextEditingController();
   TextEditingController password = TextEditingController();
 
   bool visibility = true;
   @override
   Widget build(BuildContext context) {
-    
-
+    SignupAuthProvider signupAuthProvider =
+        Provider.of<SignupAuthProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -35,13 +39,13 @@ class _SignupPageState extends State<SignupPage> {
               Column(
                 children: [
                   TextFormField(
-                    controller: fullName,
+                    controller: fullname,
                     decoration: InputDecoration(
                       hintText: "Full name",
                     ),
                   ),
                   TextFormField(
-                    controller: emailAddress,
+                    controller: emailAdress,
                     decoration: InputDecoration(
                       hintText: "Email address",
                     ),
@@ -65,7 +69,33 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ],
               ),
-            
+              Column(
+                children: [
+                  MyButton(
+                    onPressed: () {
+                      signupAuthProvider.signupValidation(
+                        fullname: fullname,
+                        context: context,
+                        emailAdress: emailAdress,
+                        password: password,
+                      );
+                    },
+                    text: "SIGN UP",
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Already have an account?\t\t"),
+                      Text(
+                        "LOGIN",
+                      )
+                    ],
+                  )
+                ],
+              ),
             ],
           ),
         ),
