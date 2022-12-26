@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "807277044929",
+    "project_id": "tasteefood-319bd",
+    "storage_bucket": "tasteefood-319bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807277044929:android:b67469455b7792676f2040",
+        "android_client_info": {
+          "package_name": "com.example.new_food_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807277044929-3qcqmkoc5uu1ljhre566ngiktvop6889.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHK-xk-IXEBOd0zSa6wlI1semYN3Lx0J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807277044929-3qcqmkoc5uu1ljhre566ngiktvop6889.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

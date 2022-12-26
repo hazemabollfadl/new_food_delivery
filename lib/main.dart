@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/signup/signup_page.dart';
 import 'package:new_food_delivery/pages/welcome/welcome_page.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WelcomePage(),
+      home: const SignupPage(),
     );
   }
 }
