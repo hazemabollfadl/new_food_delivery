@@ -68,9 +68,9 @@ class SignupAuthProvider with ChangeNotifier {
             .doc(userCredential!.user!.uid)
             .set(
           {
-            "fullname": fullname,
-            "emailAdress": emailAdress,
-            "password": password,
+            "fullname": fullname.text,
+            "emailAdress": emailAdress.text,
+            "password": password.text,
             "userUid": userCredential!.user!.uid,
           },
         ).then((value) {
