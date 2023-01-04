@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/home/home_page.dart';
+import 'package:new_food_delivery/pages/login/components/login_auth_provider.dart';
 import 'package:new_food_delivery/pages/signup/components/signup_auth_provider.dart';
-import 'package:new_food_delivery/pages/signup/signup_page.dart';
+import 'package:new_food_delivery/pages/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => SignupAuthProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginAuthProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -44,7 +50,16 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const SignupPage(),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: ((context, userSnp) {
+            if (userSnp.hasData) {
+              return HomePage();
+            }
+            return WelcomePage();
+          }),
+        ),
+        // home: const SignupPage(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/appColors/app_colors.dart';
 
 class TopPart extends StatelessWidget {
   const TopPart({super.key});
@@ -23,7 +24,7 @@ class TopPart extends StatelessWidget {
             Text(
               "login",
               style: TextStyle(
-                color: Colors.black,
+                color: AppColors.kblackColor,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

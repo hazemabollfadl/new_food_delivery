@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/login/login_page.dart';
 import 'package:new_food_delivery/pages/signup/components/signup_auth_provider.dart';
 import 'package:new_food_delivery/pages/signup/signup_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
@@ -93,8 +94,17 @@ class _SignupPageState extends State<SignupPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already have an account?\t\t"),
-                      Text(
-                        "LOGIN",
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "LOGIN",
+                        ),
                       )
                     ],
                   )
