@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import '../login/Login_Page.dart';
+import 'package:new_food_delivery/widgets/build_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,23 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: BuildDrawer(),
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut().then(
-                    (value) => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ),
-                    ),
-                  );
-            },
-            icon: Icon(
-              Icons.exit_to_app,
-            ),
-          )
-        ],
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: Center(
         child: Text("HomePage"),

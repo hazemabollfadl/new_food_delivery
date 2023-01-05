@@ -5,6 +5,7 @@ import 'package:new_food_delivery/pages/signup/signup_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 import 'package:provider/provider.dart';
+import '../../route/routing_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -96,10 +97,9 @@ class _SignupPageState extends State<SignupPage> {
                       Text("Already have an account?\t\t"),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ),
+                          RoutingPage.goTonext(
+                            context: context,
+                            navigateTo: LoginPage(),
                           );
                         },
                         child: Text(

@@ -6,7 +6,6 @@ import 'package:new_food_delivery/pages/signup/components/signup_auth_provider.d
 import 'package:new_food_delivery/pages/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'firebase_options.dart';
 
 void main() async {

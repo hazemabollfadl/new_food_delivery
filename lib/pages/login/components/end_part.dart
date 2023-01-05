@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/signup/signup_page.dart';
 
+import '../../../route/routing_page.dart';
 import '../../../widgets/my_button.dart';
 
 class EndPart extends StatelessWidget {
@@ -31,10 +32,9 @@ class EndPart extends StatelessWidget {
             Text("Don't have an account?\t\t"),
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => SignupPage(),
-                  ),
+                RoutingPage.goTonext(
+                  context: context,
+                  navigateTo: SignupPage(),
                 );
               },
               child: Text(

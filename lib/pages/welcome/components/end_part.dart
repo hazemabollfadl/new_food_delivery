@@ -4,6 +4,8 @@ import 'package:new_food_delivery/pages/login/login_page.dart';
 import 'package:new_food_delivery/pages/signup/signup_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 
+import '../../../route/routing_page.dart';
+
 class EndPart extends StatelessWidget {
   const EndPart({Key? key}) : super(key: key);
 
@@ -13,10 +15,9 @@ class EndPart extends StatelessWidget {
       children: [
         MyButton(
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => LoginPage(),
-              ),
+            RoutingPage.goTonext(
+              context: context,
+              navigateTo: LoginPage(),
             );
           },
           text: "LOG IN",
@@ -26,10 +27,9 @@ class EndPart extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => SignupPage(),
-              ),
+            RoutingPage.goTonext(
+              context: context,
+              navigateTo: SignupPage(),
             );
           },
           child: Text(
