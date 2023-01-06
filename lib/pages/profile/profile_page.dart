@@ -6,7 +6,7 @@ import 'package:new_food_delivery/route/routing_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key?key}):super(key:key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -33,7 +33,6 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
 
   Widget nonEditTextField() {
     return Column(
@@ -73,7 +72,9 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         TextFormField(
           controller: fullName,
-          decoration: InputDecoration(hintText: "fullName"),
+          decoration: InputDecoration(
+            hintText: "fullName",
+          ),
         ),
         TextFormField(
           controller: emailAddress,
@@ -84,7 +85,12 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(
           height: 10,
         ),
-       
+        MyButton(
+          onPressed: () {
+            buildUpdateProfile();
+          },
+          text: "Up date",
+        )
       ],
     );
   }
@@ -95,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update(
       {
-        "fullName": fullName.text,
+        "fullname": fullName.text,
         "emailAdress": emailAddress.text,
       },
     ).then(

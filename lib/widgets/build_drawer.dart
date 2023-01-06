@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/home/home_page.dart';
 import 'package:new_food_delivery/pages/login/login_page.dart';
+import 'package:new_food_delivery/pages/profile/profile_page.dart';
+import 'package:new_food_delivery/route/routing_page.dart';
 
 class BuildDrawer extends StatelessWidget {
   const BuildDrawer({Key? key}) : super(key: key);
@@ -23,7 +25,12 @@ class BuildDrawer extends StatelessWidget {
           ), // User AccountsDrawerHeader
           ListTile(
             leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                RoutingPage.goTonext(
+                  context: context,
+                  navigateTo: ProfilePage(),
+                );
+              },
               icon: Icon(
                 Icons.person,
               ),
