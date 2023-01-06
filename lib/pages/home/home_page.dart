@@ -1,13 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/model/user_model.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
 
-class HomePage extends StatelessWidget {
+late UserModel userModel;
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<HomePage> {
+  Future getCurrentUserDataFunction() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        userModel = UserModel.fromDocument(documentSnapshot);
+      } else {
+        print("document dosen't exist the Database");
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    getCurrentUserDataFunction();
     return Scaffold(
       drawer: BuildDrawer(),
       appBar: AppBar(
