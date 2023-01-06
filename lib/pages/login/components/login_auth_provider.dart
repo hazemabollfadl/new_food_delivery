@@ -14,8 +14,8 @@ class LoginAuthProvider with ChangeNotifier {
   UserCredential? userCredential;
 
   void loginPageValidation({
-    required TextEditingController emailAdress,
-    required TextEditingController password,
+    required TextEditingController? emailAdress,
+    required TextEditingController? password,
     required BuildContext context,
   }) async {
     if (emailAdress!.text.trim().isEmpty) {

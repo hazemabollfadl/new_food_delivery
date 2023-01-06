@@ -6,7 +6,9 @@ import 'package:new_food_delivery/route/routing_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  static Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regExp = RegExp(ProfilePage.pattern.toString());
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -32,6 +34,37 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Text(hintText),
       ),
     );
+  }
+
+  void profilevalidation({
+    required TextEditingController? emailAdress,
+    required TextEditingController? fullName,
+    required BuildContext context,
+  }) async {
+    if (fullName!.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Password is empty"),
+        ),
+      );
+      return;
+    } else if (emailAdress!.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Email address is empty"),
+        ),
+      );
+      return;
+    } else if (!widget.regExp.hasMatch(emailAdress.text.trim())) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Enter a valid email address"),
+        ),
+      );
+      return;
+    } else {
+      buildUpdateProfile();
+    }
   }
 
   Widget nonEditTextField() {
@@ -87,7 +120,11 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         MyButton(
           onPressed: () {
-            buildUpdateProfile();
+            profilevalidation(
+              context: context,
+              emailAdress: emailAddress,
+              fullName: fullName,
+            );
           },
           text: "Up date",
         )
