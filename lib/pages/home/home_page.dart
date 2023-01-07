@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/model/user_model.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
 import 'package:new_food_delivery/widgets/grid_view_widget.dart';
+
+import '../../widgets/single_product.dart';
 
 late UserModel userModel;
 
@@ -119,8 +122,8 @@ class _MyWidgetState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                SingleProduct(),
-                SingleProduct(),
+                // SingleProduct(),
+                // SingleProduct(),
               ],
             ),
           ),
@@ -139,8 +142,8 @@ class _MyWidgetState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                SingleProduct(),
-                SingleProduct(),
+                // SingleProduct(),
+                // SingleProduct(),
               ],
             ),
           ),
@@ -183,36 +186,6 @@ class categories extends StatelessWidget {
           child: Text(categoryName),
         ),
       ),
-    );
-  }
-}
-
-class SingleProduct extends StatelessWidget {
-  const SingleProduct({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.all(12.0),
-          height: 100,
-          width: 150,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Text(
-              "\$30",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-              ),
-            ))
-      ],
     );
   }
 }
