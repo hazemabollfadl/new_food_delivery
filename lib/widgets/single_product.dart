@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SingleProduct extends StatelessWidget {
-  final String image;
-  final String name;
-  final double price;
+  // final String image;
+  // final String name;
+  // final double price;
   const SingleProduct({
-    required this.image,
-    required this.name,
-    required this.price,
+    // required this.image,
+    // required this.name,
+    // required this.price,
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +35,8 @@ class SingleProduct extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "\$$price",
+                //"\$$price",
+                "\$30",
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                 ),
@@ -44,7 +45,8 @@ class SingleProduct extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                name,
+                //name,
+                "flour",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),

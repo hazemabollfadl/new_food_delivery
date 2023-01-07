@@ -64,12 +64,12 @@ class GridViewWidget extends StatelessWidget {
               crossAxisSpacing: 20,
             ),
             itemBuilder: (context, index) {
-              var data = snapshot.data!.docs[index];
+              // var data = snapshot.data!.docs[index];
               return SingleProduct(
-                image: data["productImage"],
-                name: data["productName"],
-                price: data["priductPrice"],
-              );
+                  // image: data["productImage"],
+                  // name: data["productName"],
+                  // price: data["priductPrice"],
+                  );
             },
           );
           //],
