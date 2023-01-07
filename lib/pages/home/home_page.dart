@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/model/user_model.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
+import 'package:new_food_delivery/widgets/grid_view_widget.dart';
 
 late UserModel userModel;
 
@@ -84,6 +84,17 @@ class _MyWidgetState extends State<HomePage> {
                   itemCount: streamSnapshort.data!.docs.length,
                   itemBuilder: (ctx, index) {
                     return categories(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => GridViewWidget(
+                              collection: streamSnapshort.data!.docs[index]
+                                  ["categoryName"],
+                              id: streamSnapshort.data!.docs[index].id,
+                            ),
+                          ),
+                        );
+                      },
                       categoryName: streamSnapshort.data!.docs[index]
                           ["categoryName"],
                       image: streamSnapshort.data!.docs[index]["categoryimage"],
@@ -142,27 +153,35 @@ class _MyWidgetState extends State<HomePage> {
 class categories extends StatelessWidget {
   final String image;
   final String categoryName;
+  final Function()? onTap;
 
-  const categories({Key? key, required this.categoryName, required this.image})
+  const categories(
+      {Key? key,
+      required this.categoryName,
+      required this.image,
+      required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(12.0),
-      height: 100,
-      width: 150,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-            image,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(12.0),
+        height: 100,
+        width: 150,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+              image,
+            ),
           ),
+          borderRadius: BorderRadius.circular(10),
         ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text(categoryName),
+        child: Center(
+          child: Text(categoryName),
+        ),
       ),
     );
   }
