@@ -68,20 +68,29 @@ class _MyWidgetState extends State<HomePage> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                categories(
-                  categoryName: "Food",
-                  image: "images/logo.jpg",
-                ),
-                categories(
-                  categoryName: "burger",
-                  image: "images/logo.jpg",
-                ),
-              ],
+          Container(
+            height: 100,
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("categories")
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+                if (!streamSnapshort.hasData) {
+                  return Center(child: const CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: streamSnapshort.data!.docs.length,
+                  itemBuilder: (ctx, index) {
+                    return categories(
+                      categoryName: streamSnapshort.data!.docs[index]
+                          ["categoryName"],
+                      image: streamSnapshort.data!.docs[index]["categoryimage"],
+                    );
+                  },
+                );
+              },
             ),
           ),
           ListTile(
@@ -146,7 +155,7 @@ class categories extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage(
+          image: NetworkImage(
             image,
           ),
         ),
