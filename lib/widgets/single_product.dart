@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 class SingleProduct extends StatelessWidget {
-  // final String image;
-  // final String name;
-  // final double price;
+  final String image;
+  final String name;
+  final double price;
   const SingleProduct({
-    // required this.image,
-    // required this.name,
-    // required this.price,
+    required this.image,
+    required this.name,
+    required this.price,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           margin: EdgeInsets.all(12.0),
@@ -29,30 +28,25 @@ class SingleProduct extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                //"\$$price",
-                "\$30",
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: 5,
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Text(
+              "\$$price",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                //name,
-                "flour",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

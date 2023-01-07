@@ -117,6 +117,30 @@ class _MyWidgetState extends State<HomePage> {
               ),
             ),
           ),
+          Container(
+            height: 200,
+            child: StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection("products").snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+                if (!streamSnapshort.hasData) {
+                  return Center(child: const CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: streamSnapshort.data!.docs.length,
+                  itemBuilder: (ctx, index) {
+                    return SingleProduct(
+                      name: streamSnapshort.data!.docs[index]["productName"],
+                      image: streamSnapshort.data!.docs[index]["productimage"],
+                      price: streamSnapshort.data!.docs[index]["productPrice"],
+                    );
+                  },
+                );
+              },
+            ),
+          ),
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -135,16 +159,6 @@ class _MyWidgetState extends State<HomePage> {
                 color: Colors.grey,
                 fontWeight: FontWeight.normal,
               ),
-            ),
-          ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                // SingleProduct(),
-                // SingleProduct(),
-              ],
             ),
           ),
         ],
@@ -182,8 +196,20 @@ class categories extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Center(
-          child: Text(categoryName),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.black.withOpacity(0.7),
+          ),
+          child: Center(
+            child: Text(
+              categoryName,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
       ),
     );
