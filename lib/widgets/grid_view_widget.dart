@@ -66,6 +66,7 @@ class GridViewWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               var data = snapshot.data!.docs[index];
               return SingleProduct(
+                onTap: () {},
                 image: data["productImage"],
                 name: data["productName"],
                 price: data["priductPrice"],
