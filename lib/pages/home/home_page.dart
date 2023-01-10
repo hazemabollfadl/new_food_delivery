@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/model/user_model.dart';
-import 'package:new_food_delivery/pages/detailPage/details_page.dart';
-import 'package:new_food_delivery/route/routing_page.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
 import 'package:new_food_delivery/widgets/grid_view_widget.dart';
 
+import '../../route/routing_page.dart';
 import '../../widgets/single_product.dart';
+import '../detailPage/details_page.dart';
 
 late UserModel userModel;
 
@@ -122,14 +122,8 @@ class _MyWidgetState extends State<HomePage> {
           Container(
             height: 200,
             child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("products")
-                  .where("productRate", isGreaterThan: 4)
-                  .orderBy(
-                    "productRate",
-                    descending: true,
-                  )
-                  .snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection("products").snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
                 if (!streamSnapshort.hasData) {
                   return Center(child: const CircularProgressIndicator());
@@ -155,11 +149,27 @@ class _MyWidgetState extends State<HomePage> {
               },
             ),
           ),
+          ListTile(
+            leading: Text(
+              "Best Sell ",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.grey,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
           Container(
             height: 200,
             child: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("products").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("products")
+                  .where("productRate", isGreaterThan: 4)
+                  .orderBy(
+                    "productRate",
+                    descending: true,
+                  )
+                  .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
                 if (!streamSnapshort.hasData) {
                   return Center(child: const CircularProgressIndicator());
@@ -178,16 +188,6 @@ class _MyWidgetState extends State<HomePage> {
                   },
                 );
               },
-            ),
-          ),
-          ListTile(
-            leading: Text(
-              "Best Sell ",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.grey,
-                fontWeight: FontWeight.normal,
-              ),
             ),
           ),
         ],

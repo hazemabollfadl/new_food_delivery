@@ -33,48 +33,47 @@ class GridViewWidget extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          return //Column(
-              // children: [
-              //   Padding(
-              //   padding: const EdgeInsets.all(0.0),
-              //   child: Material(
-              //     elevation: 7,
-              //     shadowColor: Colors.grey[300],
-              //     child: TextFormField(
-              //       decoration: InputDecoration(
-              //         prefixIcon: Icon(Icons.search),
-              //         fillColor: Colors.white,
-              //         hintText: "Search your product",
-              //         filled: true,
-              //         border: OutlineInputBorder(
-              //           borderSide: BorderSide.none,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Material(
+                  elevation: 7,
+                  shadowColor: Colors.grey[300],
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      fillColor: Colors.white,
+                      hintText: "Search your product",
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               GridView.builder(
-            //shrinkWrap: true,
-            // itemCount: snapshot.data?.docs.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.4,
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-            ),
-            itemBuilder: (context, index) {
-              var data = snapshot.data!.docs[index];
-              return SingleProduct(
-                onTap: () {},
-                image: data["productImage"],
-                name: data["productName"],
-                price: data["priductPrice"],
-              );
-            },
+                shrinkWrap: true,
+                itemCount: snapshot.data?.docs.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 0.4,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                ),
+                itemBuilder: (context, index) {
+                  var data = snapshot.data!.docs[index];
+                  return SingleProduct(
+                    onTap: () {},
+                    image: data["productimage"],
+                    name: data["productName"],
+                    price: data["productPrice"],
+                  );
+                },
+              ),
+            ],
           );
-          //],
-          //);
         },
       ),
     );

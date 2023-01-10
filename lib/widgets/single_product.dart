@@ -4,11 +4,10 @@ class SingleProduct extends StatelessWidget {
   final String image;
   final String name;
   final double price;
-
   final Function()? onTap;
   const SingleProduct({
-    required this.onTap,
     required this.image,
+    required this.onTap,
     required this.name,
     required this.price,
     Key? key,
@@ -27,8 +26,7 @@ class SingleProduct extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(
-                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcairowestmag.com%2Fbest-burger-places-in-cairo%2F&psig=AOvVaw0q6BAw5WhviN008KzVkkTh&ust=1673395592521000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOjXicLau_wCFQAAAAAdAAAAABAD"),
+                image: NetworkImage(image),
               ),
               borderRadius: BorderRadius.circular(20),
             ),
