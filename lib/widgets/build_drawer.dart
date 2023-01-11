@@ -26,9 +26,7 @@ class BuildDrawer extends StatelessWidget {
           ListTile(
             leading: IconButton(
               onPressed: () {
-                RoutingPage.goTonext(
-                  context: context,
-                  navigateTo: ProfilePage(),
+                RoutingPage.goTonext(context: context, navigateTo: ProfilePage(),
                 );
               },
               icon: Icon(

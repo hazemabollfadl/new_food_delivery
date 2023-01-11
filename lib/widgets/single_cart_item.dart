@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/cartpage/cart_page.dart';
 
-class SingleCartItem extends StatelessWidget {
+class SingleCartItem extends StatefulWidget {
   final String productimage;
   final String productName;
   final double productPrice;
   final int productQuantity;
+  //final String productCategory; 
 
   const SingleCartItem({
     Key? key,
+   // required this.productCategory,
     required this.productPrice,
     required this.productQuantity,
     required this.productName,
@@ -16,7 +18,15 @@ class SingleCartItem extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SingleCartItem> createState() => _SingleCartItemState();
+}
+
+class _SingleCartItemState extends State<SingleCartItem> {
+  int quanitity=1;
+
+  @override
   Widget build(BuildContext context) {
+    print(quanitity);
     return Container(
       margin: EdgeInsets.all(20.0),
       height: 159,
@@ -34,7 +44,7 @@ class SingleCartItem extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(productimage),
+                  image: NetworkImage(widget.productimage),
                 ),
               ),
             ),
@@ -47,15 +57,16 @@ class SingleCartItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    productName,
+                    widget.productName,
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
-                    "food",
+                    "Food",
+                    //widget.productCategory,
                     style: TextStyle(),
                   ),
                   Text(
-                    "\$$productPrice",
+                    "\$${widget.productPrice*widget.productQuantity}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,17 +76,27 @@ class SingleCartItem extends StatelessWidget {
                     children: [
                       IncrementAndDecrement(
                         icon: Icons.add,
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            quanitity++;
+                          });
+                        },
                       ),
                       Text(
-                        productQuantity.toString(),
+                        widget.productQuantity.toString(),
                         style: TextStyle(
                           fontSize: 18,
                         ),
                       ),
                       IncrementAndDecrement(
                         icon: Icons.remove,
-                        onPressed: () {},
+                        onPressed: () {
+                          if (quanitity>1){
+                             setState(() {
+                                quanitity--;
+                          });
+                            }
+                        },
                       ),
                     ],
                   )

@@ -14,7 +14,7 @@ class UserModel {
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
     return UserModel(
-      fullName: doc['fullname'],
+      fullName: doc['fullName'],
       emailAddress: doc['emailAdress'],
       password: doc['password'],
       userUid: doc['userUid'],
