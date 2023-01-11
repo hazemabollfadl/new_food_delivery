@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/cartpage/cart_page.dart';
+import 'package:new_food_delivery/route/routing_page.dart';
 
 import '../../../appColors/app_colors.dart';
 import '../../../widgets/my_button.dart';
@@ -9,9 +11,11 @@ class SecondPart extends StatelessWidget {
   final double productPrice;
   final double productOldPrice;
   final int productRate;
+  final String productDescription;
 
   const SecondPart({
     Key? key,
+    required this.productDescription,
     required this.productName,
     required this.productPrice,
     required this.productOldPrice,
@@ -35,11 +39,11 @@ class SecondPart extends StatelessWidget {
           ),
           Row(
             children: [
-              Text("\$productPrice"),
+              Text("\$$productPrice"),
               SizedBox(
                 width: 20,
               ),
-              Text("\$productOldPrice",
+              Text("\$$productOldPrice",
                   style: TextStyle(
                     decoration: TextDecoration.lineThrough,
                   ))
@@ -88,10 +92,17 @@ class SecondPart extends StatelessWidget {
             ),
           ),
           Text(
-            " eyad amir bassem omar hazem ",
+            productDescription,
             style: TextStyle(),
           ),
-          MyButton(onPressed: () {}, text: "Add to cart"),
+          MyButton(
+              onPressed: () {
+                RoutingPage.goTonext(
+                  context: context,
+                  navigateTo: cartpage(),
+                );
+              },
+              text: "Add to cart"),
         ],
       ),
     );

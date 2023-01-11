@@ -74,7 +74,7 @@ class _MyWidgetState extends State<HomePage> {
             ),
           ),
           Container(
-            height: 100,
+            height: 150,
             child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("categories")
@@ -102,7 +102,8 @@ class _MyWidgetState extends State<HomePage> {
                       },
                       categoryName: streamSnapshort.data!.docs[index]
                           ["categoryName"],
-                      image: streamSnapshort.data!.docs[index]["categoryimage"],
+                      categoryimage: streamSnapshort.data!.docs[index]
+                          ["categoryimage"],
                     );
                   },
                 );
@@ -120,7 +121,7 @@ class _MyWidgetState extends State<HomePage> {
             ),
           ),
           Container(
-            height: 200,
+            height: 280,
             child: StreamBuilder(
               stream:
                   FirebaseFirestore.instance.collection("products").snapshots(),
@@ -140,11 +141,12 @@ class _MyWidgetState extends State<HomePage> {
                         RoutingPage.goTonext(
                           context: context,
                           navigateTo: DetailsPage(
-                            productImage: data["productImage"],
+                            productimage: data["productimage"],
                             productName: data["productName"],
-                            productOldPrice: data["productOldPrice"],
+                            productOldprice: data["productOldprice"],
                             productPrice: data["productPrice"],
                             productRate: data["productRate"],
+                            productDescription: data["productDescription"],
                           ),
                         );
                       },
@@ -187,11 +189,24 @@ class _MyWidgetState extends State<HomePage> {
                   physics: BouncingScrollPhysics(),
                   itemCount: streamSnapshort.data!.docs.length,
                   itemBuilder: (ctx, index) {
+                    var data = streamSnapshort.data!.docs[index];
                     return SingleProduct(
-                      onTap: () {},
-                      name: streamSnapshort.data!.docs[index]["productName"],
-                      image: streamSnapshort.data!.docs[index]["productimage"],
-                      price: streamSnapshort.data!.docs[index]["productPrice"],
+                      onTap: () {
+                        RoutingPage.goTonext(
+                          context: context,
+                          navigateTo: DetailsPage(
+                            productimage: data["productimage"],
+                            productName: data["productName"],
+                            productOldprice: data["productOldprice"],
+                            productPrice: data["productPrice"],
+                            productRate: data["productRate"],
+                            productDescription: data["productDescription"],
+                          ),
+                        );
+                      },
+                      name: data["productName"],
+                      image: data["productimage"],
+                      price: data["productPrice"],
                     );
                   },
                 );
@@ -205,14 +220,14 @@ class _MyWidgetState extends State<HomePage> {
 }
 
 class categories extends StatelessWidget {
-  final String image;
+  final String categoryimage;
   final String categoryName;
   final Function()? onTap;
 
   const categories(
       {Key? key,
       required this.categoryName,
-      required this.image,
+      required this.categoryimage,
       required this.onTap})
       : super(key: key);
 
@@ -228,7 +243,7 @@ class categories extends StatelessWidget {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              image,
+              categoryimage,
             ),
           ),
           borderRadius: BorderRadius.circular(10),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Toppart extends StatelessWidget {
-  final String productImage;
+  final String productimage;
 
   const Toppart({
     Key? key,
-    required this.productImage,
+    required this.productimage,
   }) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class Toppart extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(productImage),
+          image: NetworkImage(productimage),
         ),
       ),
     ));

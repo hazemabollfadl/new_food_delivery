@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/widgets/single_product.dart';
 
+import '../pages/detailPage/details_page.dart';
+import '../route/routing_page.dart';
+
 class GridViewWidget extends StatelessWidget {
   final String id;
   final String collection;
@@ -65,7 +68,19 @@ class GridViewWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var data = snapshot.data!.docs[index];
                   return SingleProduct(
-                    onTap: () {},
+                    onTap: () {
+                      RoutingPage.goTonext(
+                        context: context,
+                        navigateTo: DetailsPage(
+                          productimage: data["productimage"],
+                          productName: data["productName"],
+                          productOldprice: data["productOldprice"],
+                          productPrice: data["productPrice"],
+                          productRate: data["productRate"],
+                          productDescription: data["productDescription"],
+                        ),
+                      );
+                    },
                     image: data["productimage"],
                     name: data["productName"],
                     price: data["productPrice"],

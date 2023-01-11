@@ -7,19 +7,21 @@ import 'package:new_food_delivery/widgets/my_button.dart';
 import 'components/top_part.dart';
 
 class DetailsPage extends StatelessWidget {
-  final String productImage;
+  final String productimage;
   final String productName;
   final double productPrice;
-  final double productOldPrice;
+  final double productOldprice;
   final int productRate;
+  final String productDescription;
 
   const DetailsPage({
     Key? key,
     required this.productName,
-    required this.productImage,
+    required this.productimage,
     required this.productPrice,
-    required this.productOldPrice,
+    required this.productOldprice,
     required this.productRate,
+    required this.productDescription,
   }) : super(key: key);
 
   @override
@@ -35,11 +37,12 @@ class DetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Toppart(
-              productImage: productImage,
+              productimage: productimage,
             ),
             SecondPart(
+              productDescription: productDescription,
               productName: productName,
-              productOldPrice: productOldPrice,
+              productOldPrice: productOldprice,
               productPrice: productPrice,
               productRate: productRate,
             ),
