@@ -13,6 +13,7 @@ class DetailsPage extends StatelessWidget {
   final double productOldprice;
   final int productRate;
   final String productDescription;
+  final String productID;
 
   const DetailsPage({
     Key? key,
@@ -22,6 +23,7 @@ class DetailsPage extends StatelessWidget {
     required this.productOldprice,
     required this.productRate,
     required this.productDescription,
+    required this.productID,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,8 @@ class DetailsPage extends StatelessWidget {
               productimage: productimage,
             ),
             SecondPart(
+              productimage: productimage,
+              productID: productID,
               productDescription: productDescription,
               productName: productName,
               productOldPrice: productOldprice,

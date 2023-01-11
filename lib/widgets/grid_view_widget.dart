@@ -78,6 +78,7 @@ class GridViewWidget extends StatelessWidget {
                           productPrice: data["productPrice"],
                           productRate: data["productRate"],
                           productDescription: data["productDescription"],
+                          productID: data["productID"],
                         ),
                       );
                     },

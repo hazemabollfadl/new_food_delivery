@@ -147,6 +147,7 @@ class _MyWidgetState extends State<HomePage> {
                             productPrice: data["productPrice"],
                             productRate: data["productRate"],
                             productDescription: data["productDescription"],
+                            productID: data["productID"],
                           ),
                         );
                       },
@@ -201,6 +202,7 @@ class _MyWidgetState extends State<HomePage> {
                             productPrice: data["productPrice"],
                             productRate: data["productRate"],
                             productDescription: data["productDescription"],
+                            productID: data["productID"],
                           ),
                         );
                       },

@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/cartpage/cart_page.dart';
@@ -12,9 +15,13 @@ class SecondPart extends StatelessWidget {
   final double productOldPrice;
   final int productRate;
   final String productDescription;
+  final String productID;
+  final String productimage;
 
   const SecondPart({
     Key? key,
+    required this.productimage,
+    required this.productID,
     required this.productDescription,
     required this.productName,
     required this.productPrice,
@@ -97,6 +104,23 @@ class SecondPart extends StatelessWidget {
           ),
           MyButton(
               onPressed: () {
+                FirebaseFirestore.instance
+                    .collection("cart")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection("UserCart")
+                    .doc(productID)
+                    .set(
+                  {
+                    "productID": productID,
+                    "productimage": productimage,
+                    "productName": productName,
+                    "productPrice": productPrice,
+                    "productOldPrice": productOldPrice,
+                    "productDescription": productDescription,
+                    "productRate": productRate,
+                    "productQuantity": 1,
+                  },
+                );
                 RoutingPage.goTonext(
                   context: context,
                   navigateTo: cartpage(),
