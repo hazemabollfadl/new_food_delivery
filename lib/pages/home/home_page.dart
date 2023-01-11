@@ -1,16 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:new_food_delivery/widgets/build_drawer.dart';
 import 'package:new_food_delivery/model/user_model.dart';
+import 'package:new_food_delivery/widgets/build_drawer.dart';
+import 'package:new_food_delivery/widgets/grid_view_widget.dart';
+
+import '../../route/routing_page.dart';
+import '../../widgets/single_product.dart';
+import '../detailPage/details_page.dart';
 
 late UserModel userModel;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<HomePage> {
+  Future getCurrentUserDataFunction() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        userModel = UserModel.fromDocument(documentSnapshot);
+      } else {
+        print("document dosen't exist the Database");
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    getCurrentUserDataFunction();
     return Scaffold(
       drawer: BuildDrawer(),
       appBar: AppBar(
@@ -42,25 +68,46 @@ class HomePage extends StatelessWidget {
               "categories ",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 98, 21, 21),
                 fontWeight: FontWeight.normal,
               ),
             ),
           ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                categories(
-                  categoryName: "Food",
-                  image: "images/logo.jpg",
-                ),
-                categories(
-                  categoryName: "burger",
-                  image: "images/logo.jpg",
-                ),
-              ],
+          Container(
+            height: 150,
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("categories")
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+                if (!streamSnapshort.hasData) {
+                  return Center(child: const CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: streamSnapshort.data!.docs.length,
+                  itemBuilder: (ctx, index) {
+                    return categories(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => GridViewWidget(
+                              collection: streamSnapshort.data!.docs[index]
+                                  ["categoryName"],
+                              id: streamSnapshort.data!.docs[index].id,
+                            ),
+                          ),
+                        );
+                      },
+                      categoryName: streamSnapshort.data!.docs[index]
+                          ["categoryName"],
+                      categoryimage: streamSnapshort.data!.docs[index]
+                          ["categoryimage"],
+                    );
+                  },
+                );
+              },
             ),
           ),
           ListTile(
@@ -73,14 +120,45 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                SingleProduct(),
-                SingleProduct(),
-              ],
+          Container(
+            height: 280,
+            child: StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection("products").snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+                if (!streamSnapshort.hasData) {
+                  return Center(child: const CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: streamSnapshort.data!.docs.length,
+                  itemBuilder: (ctx, index) {
+                    var data = streamSnapshort.data!.docs[index];
+
+                    return SingleProduct(
+                      onTap: () {
+                        RoutingPage.goTonext(
+                          context: context,
+                          navigateTo: DetailsPage(
+                            productimage: data["productimage"],
+                            productName: data["productName"],
+                            productOldprice: data["productOldprice"],
+                            productPrice: data["productPrice"],
+                            productRate: data["productRate"],
+                            productDescription: data["productDescription"],
+                            productID: data["productID"],
+                            productCategory: data["productCategory"],
+                          ),
+                        );
+                      },
+                      name: data["productName"],
+                      image: data["productimage"],
+                      price: data["productPrice"],
+                    );
+                  },
+                );
+              },
             ),
           ),
           ListTile(
@@ -93,14 +171,50 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                SingleProduct(),
-                SingleProduct(),
-              ],
+          Container(
+            height: 200,
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("products")
+                  .where("productRate", isGreaterThan: 4)
+                  .orderBy(
+                    "productRate",
+                    descending: true,
+                  )
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+                if (!streamSnapshort.hasData) {
+                  return Center(child: const CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: streamSnapshort.data!.docs.length,
+                  itemBuilder: (ctx, index) {
+                    var data = streamSnapshort.data!.docs[index];
+                    return SingleProduct(
+                      onTap: () {
+                        RoutingPage.goTonext(
+                          context: context,
+                          navigateTo: DetailsPage(
+                            productimage: data["productimage"],
+                            productName: data["productName"],
+                            productOldprice: data["productOldprice"],
+                            productPrice: data["productPrice"],
+                            productRate: data["productRate"],
+                            productDescription: data["productDescription"],
+                            productID: data["productID"],
+                            productCategory: data["productCategory"],
+                          ),
+                        );
+                      },
+                      name: data["productName"],
+                      image: data["productimage"],
+                      price: data["productPrice"],
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
@@ -110,60 +224,50 @@ class HomePage extends StatelessWidget {
 }
 
 class categories extends StatelessWidget {
-  final String image;
+  final String categoryimage;
   final String categoryName;
+  final Function()? onTap;
 
-  const categories({Key? key, required this.categoryName, required this.image})
+  const categories(
+      {Key? key,
+      required this.categoryName,
+      required this.categoryimage,
+      required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(12.0),
-      height: 100,
-      width: 150,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(
-            image,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(12.0),
+        height: 100,
+        width: 150,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+              categoryimage,
+            ),
           ),
+          borderRadius: BorderRadius.circular(10),
         ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text(categoryName),
-      ),
-    );
-  }
-}
-
-class SingleProduct extends StatelessWidget {
-  const SingleProduct({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.all(12.0),
-          height: 100,
-          width: 150,
+        child: Container(
           decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.black.withOpacity(0.7),
+          ),
+          child: Center(
+            child: Text(
+              categoryName,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
-        Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Text(
-              "\$30",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-              ),
-            ))
-      ],
+      ),
     );
   }
 }

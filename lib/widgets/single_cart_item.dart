@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/cartpage/cart_page.dart';
 
@@ -6,11 +9,13 @@ class SingleCartItem extends StatefulWidget {
   final String productName;
   final double productPrice;
   final int productQuantity;
-  //final String productCategory; 
+  final String productCategory;
+  final String productID;
 
   const SingleCartItem({
     Key? key,
-   // required this.productCategory,
+    required this.productID,
+    required this.productCategory,
     required this.productPrice,
     required this.productQuantity,
     required this.productName,
@@ -22,11 +27,22 @@ class SingleCartItem extends StatefulWidget {
 }
 
 class _SingleCartItemState extends State<SingleCartItem> {
-  int quanitity=1;
+  int quantity = 1;
+  void quantityFunction() {
+    FirebaseFirestore.instance
+        .collection("cart")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("UserCart")
+        .doc(widget.productID)
+        .update(
+      {
+        "productQuantity": quantity,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(quanitity);
     return Container(
       margin: EdgeInsets.all(20.0),
       height: 159,
@@ -37,71 +53,81 @@ class _SingleCartItemState extends State<SingleCartItem> {
           blurRadius: 7,
         ),
       ]),
-      child: Row(
+      child: Stack(
+        alignment: Alignment.topRight,
         children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(widget.productimage),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    widget.productName,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    "Food",
-                    //widget.productCategory,
-                    style: TextStyle(),
-                  ),
-                  Text(
-                    "\$${widget.productPrice*widget.productQuantity}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(widget.productimage),
                     ),
                   ),
-                  Row(
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IncrementAndDecrement(
-                        icon: Icons.add,
-                        onPressed: () {
-                          setState(() {
-                            quanitity++;
-                          });
-                        },
+                      Text(
+                        widget.productName,
+                        style: TextStyle(fontSize: 18),
                       ),
                       Text(
-                        widget.productQuantity.toString(),
+                        "\$${widget.productPrice * widget.productQuantity}",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      IncrementAndDecrement(
-                        icon: Icons.remove,
-                        onPressed: () {
-                          if (quanitity>1){
-                             setState(() {
-                                quanitity--;
-                          });
-                            }
-                        },
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IncrementAndDecrement(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                quantity++;
+                                quantityFunction();
+                              });
+                            },
+                          ),
+                          Text(
+                            widget.productQuantity.toString(),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                          IncrementAndDecrement(
+                            icon: Icons.remove,
+                            onPressed: () {
+                              if (quantity > 1) {
+                                setState(
+                                  () {
+                                    quantity--;
+                                    quantityFunction();
+                                  },
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
+            ],
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.close,
             ),
           ),
         ],

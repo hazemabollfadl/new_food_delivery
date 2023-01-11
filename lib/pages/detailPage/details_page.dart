@@ -9,28 +9,27 @@ import 'components/top_part.dart';
 class DetailsPage extends StatelessWidget {
   final String productimage;
   final String productName;
-  final String productCategory;
   final double productPrice;
   final double productOldprice;
   final int productRate;
   final String productDescription;
   final String productID;
+  final String productCategory;
 
   const DetailsPage({
     Key? key,
     required this.productName,
-    required this.productCategory,
     required this.productimage,
     required this.productPrice,
     required this.productOldprice,
     required this.productRate,
     required this.productDescription,
     required this.productID,
+    required this.productCategory,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(productCategory);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -52,6 +51,7 @@ class DetailsPage extends StatelessWidget {
               productOldPrice: productOldprice,
               productPrice: productPrice,
               productRate: productRate,
+              productCategory: productCategory,
             ),
           ],
         ),

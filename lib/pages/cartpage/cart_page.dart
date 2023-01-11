@@ -35,10 +35,12 @@ class cartpage extends StatelessWidget {
             itemBuilder: (ctx, index) {
               var data = streamSnapshort.data!.docs[index];
               return SingleCartItem(
+                productID: data["productID"],
                 productimage: data["productimage"],
                 productPrice: data["productPrice"],
                 productQuantity: data["productQuantity"],
                 productName: data["productName"],
+                productCategory: data["productCategory"],
               );
             },
           );
