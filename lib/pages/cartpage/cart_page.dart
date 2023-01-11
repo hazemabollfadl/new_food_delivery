@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
+import 'package:new_food_delivery/widgets/single_cart_item.dart';
 
 class cartpage extends StatelessWidget {
   const cartpage({Key? key}) : super(key: key);
@@ -15,98 +19,31 @@ class cartpage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: ListView(
-        children: [
-          Container(
-            margin: EdgeInsets.all(20.0),
-            height: 159,
-            width: double.infinity,
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                blurRadius: 7,
-              ),
-            ]),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("images/logo.jpg"),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "salad",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          "food",
-                          style: TextStyle(),
-                        ),
-                        Text(
-                          "\$ 25",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IncrementAndDecrement(
-                              icon: Icons.add,
-                              onPressed: () {},
-                            ),
-                            IncrementAndDecrement(
-                              icon: Icons.remove,
-                              onPressed: () {},
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("cart")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("UserCart")
+            .snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
+          if (!streamSnapshort.hasData) {
+            return Center(child: const CircularProgressIndicator());
+          }
+          return ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: streamSnapshort.data!.docs.length,
+            itemBuilder: (ctx, index) {
+              var data = streamSnapshort.data!.docs[index];
+              return SingleCartItem(
+                productimage: data["productimage"],
+                productPrice: data["productPrice"],
+                productQuantity: data["productQuantity"],
+                productName: data["productName"],
+              );
+            },
+          );
+        },
       ),
-    );
-  }
-}
-
-class IncrementAndDecrement extends StatelessWidget {
-  final Function()? onPressed;
-  final IconData icon;
-  const IncrementAndDecrement({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      minWidth: 40,
-      height: 30,
-      elevation: 2,
-      color: Colors.grey[300],
-      onPressed: onPressed,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Icon(icon),
     );
   }
 }
