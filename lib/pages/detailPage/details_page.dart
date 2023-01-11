@@ -6,14 +6,22 @@ import 'package:new_food_delivery/widgets/my_button.dart';
 
 import 'components/top_part.dart';
 
-class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
+class DetailsPage extends StatelessWidget {
+  final String productImage;
+  final String productName;
+  final double productPrice;
+  final double productOldPrice;
+  final int productRate;
 
-  @override
-  State<DetailsPage> createState() => _DetailsPageState();
-}
+  const DetailsPage({
+    Key? key,
+    required this.productName,
+    required this.productImage,
+    required this.productPrice,
+    required this.productOldPrice,
+    required this.productRate,
+  }) : super(key: key);
 
-class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +34,15 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Toppart(),
-            SecondPart(),
+            Toppart(
+              productImage: productImage,
+            ),
+            SecondPart(
+              productName: productName,
+              productOldPrice: productOldPrice,
+              productPrice: productPrice,
+              productRate: productRate,
+            ),
           ],
         ),
       ),

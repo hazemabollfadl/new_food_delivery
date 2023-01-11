@@ -68,7 +68,7 @@ class _MyWidgetState extends State<HomePage> {
               "categories ",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 98, 21, 21),
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -133,16 +133,24 @@ class _MyWidgetState extends State<HomePage> {
                   physics: BouncingScrollPhysics(),
                   itemCount: streamSnapshort.data!.docs.length,
                   itemBuilder: (ctx, index) {
+                    var data = streamSnapshort.data!.docs[index];
+
                     return SingleProduct(
                       onTap: () {
                         RoutingPage.goTonext(
                           context: context,
-                          navigateTo: DetailsPage(),
+                          navigateTo: DetailsPage(
+                            productImage: data["productImage"],
+                            productName: data["productName"],
+                            productOldPrice: data["productOldPrice"],
+                            productPrice: data["productPrice"],
+                            productRate: data["productRate"],
+                          ),
                         );
                       },
-                      name: streamSnapshort.data!.docs[index]["productName"],
-                      image: streamSnapshort.data!.docs[index]["productimage"],
-                      price: streamSnapshort.data!.docs[index]["productPrice"],
+                      name: data["productName"],
+                      image: data["productimage"],
+                      price: data["productPrice"],
                     );
                   },
                 );
