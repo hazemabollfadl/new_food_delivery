@@ -29,7 +29,10 @@ class cartpage extends StatelessWidget {
           if (!streamSnapshort.hasData) {
             return Center(child: const CircularProgressIndicator());
           }
-          return ListView.builder(
+          return streamSnapshort.data!.docs.isEmpty?Center(
+            child: Text("No Cart"),
+          ):
+          ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: streamSnapshort.data!.docs.length,
             itemBuilder: (ctx, index) {
