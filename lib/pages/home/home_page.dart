@@ -152,9 +152,13 @@ class _MyWidgetState extends State<HomePage> {
                           ),
                         );
                       },
-                      name: data["productName"],
-                      image: data["productimage"],
-                      price: data["productPrice"],
+                      productID: data["productID"],
+                      productimage: data["productimage"],
+                      productPrice: data["productPrice"],
+                      productName: data["productName"],
+                      productCategory: data["productCategory"],
+                      productRate: data["productRate"],
+                      productOldPrice: data["productOldprice"],
                     );
                   },
                 );
@@ -208,9 +212,13 @@ class _MyWidgetState extends State<HomePage> {
                           ),
                         );
                       },
-                      name: data["productName"],
-                      image: data["productimage"],
-                      price: data["productPrice"],
+                      productID: data["productID"],
+                      productimage: data["productimage"],
+                      productPrice: data["productPrice"],
+                      productName: data["productName"],
+                      productCategory: data["productCategory"],
+                      productRate: data["productRate"],
+                      productOldPrice: data["productOldprice"],
                     );
                   },
                 );
