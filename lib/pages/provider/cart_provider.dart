@@ -28,4 +28,12 @@ class CartProvider with ChangeNotifier {
   List<CartModel> get getCartList {
     return cartList;
   }
+
+  double subtotal() {
+    double subtotal = 0.0;
+    cartList.forEach((element) {
+      subtotal += element.productPrice * element.productQuantity;
+    });
+    return subtotal;
+  }
 }
