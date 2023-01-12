@@ -126,7 +126,7 @@ class SecondPart extends StatelessWidget {
                 );
                 RoutingPage.goTonext(
                   context: context,
-                  navigateTo: cartpage(),
+                  navigateTo: CartPage(),
                 );
               },
               text: "Add to cart"),

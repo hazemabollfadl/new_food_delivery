@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/pages/home/home_page.dart';
 import 'package:new_food_delivery/pages/login/components/login_auth_provider.dart';
+import 'package:new_food_delivery/pages/provider/cart_provider.dart';
 import 'package:new_food_delivery/pages/signup/components/signup_auth_provider.dart';
 import 'package:new_food_delivery/pages/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LoginAuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         ),
       ],
       child: MaterialApp(
