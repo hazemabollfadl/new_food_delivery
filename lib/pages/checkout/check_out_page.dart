@@ -1,31 +1,33 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:new_food_delivery/route/routing_page.dart';
+import 'package:new_food_delivery/appColors/app_colors.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
-import 'package:new_food_delivery/widgets/single_cart_item.dart';
 
-import '../checkout/check_out_page.dart';
+import '../../widgets/single_cart_item.dart';
 
-class cartpage extends StatelessWidget {
-  const cartpage({Key? key}) : super(key: key);
+class CheckOutPage extends StatelessWidget {
+  const CheckOutPage ({Key? key}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MyButton(
-        text: "Check Out",
-        onPressed: () {
-          RoutingPage.goTonext(context: context, navigateTo: CheckOutPage(),
-          );
-        },
-      ),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text("Check out"
+        ,style: TextStyle(
+          color: AppColors.kblackColor,
+
+        ),),
+
       ),
-      body: StreamBuilder(
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("cart")
             .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -55,6 +57,39 @@ class cartpage extends StatelessWidget {
           );
         },
       ),
+            ),
+            Expanded(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Text("Sub Title"),
+                  trailing: Text("\$123"),
+                ),
+                 ListTile(
+                  leading: Text("Discount"),
+                  trailing: Text("%5"),
+                ),
+                 ListTile(
+                  leading: Text("Shipping"),
+                  trailing: Text("\$10"),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                 ListTile(
+                  leading: Text("Total"),
+                  trailing: Text("\$500"),
+                ),
+                MyButton(onPressed: ()=>print("button"),
+                text: "Buy",
+                )
+              ],
+              
+            ),
+            )
+        ]
+        ),
     );
+
   }
 }
