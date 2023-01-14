@@ -93,8 +93,9 @@ class _MyWidgetState extends State<HomePage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => GridViewWidget(
-                              collection: streamSnapshort.data!.docs[index]
+                              subCollection: streamSnapshort.data!.docs[index]
                                   ["categoryName"],
+                              collection: "categories" ,
                               id: streamSnapshort.data!.docs[index].id,
                             ),
                           ),

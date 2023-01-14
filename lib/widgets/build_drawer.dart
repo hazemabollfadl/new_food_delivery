@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/pages/cartpage/cart_page.dart';
+import 'package:new_food_delivery/pages/favorite/favorite_page.dart';
 import 'package:new_food_delivery/pages/home/home_page.dart';
 import 'package:new_food_delivery/pages/login/login_page.dart';
 import 'package:new_food_delivery/pages/profile/profile_page.dart';
@@ -24,61 +26,64 @@ class BuildDrawer extends StatelessWidget {
             ), // CircleAvatar
           ), // User AccountsDrawerHeader
           ListTile(
-            leading: IconButton(
-              onPressed: () {
-                RoutingPage.goTonext(
+            onTap: (){
+              RoutingPage.goTonext(
                   context: context,
                   navigateTo: ProfilePage(),
                 );
-              },
-              icon: Icon(
+            },
+            leading:
+              Icon(
                 Icons.person,
               ),
-            ),
+              
             title: Text("Profile"),
           ),
           ListTile(
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
+            onTap: () {
+               RoutingPage.goTonext(
+                context: context,
+                navigateTo: CartPage(),
+              );
+            },
+            leading: Icon(
                 Icons.shopping_cart_checkout_rounded,
               ),
-            ),
+
             title: Text("cart"),
           ),
           ListTile(
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
+            onTap: (){
+              RoutingPage.goTonext(context: context, navigateTo: FavoritePage(),
+              );
+            },
+            leading: Icon(
                 Icons.favorite,
               ),
-            ),
+
             title: Text("Favourite"),
           ),
           ListTile(
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(
+            leading:  Icon(
                 Icons.share_location_sharp,
               ),
-            ),
+            
             title: Text("My Order"),
           ),
           ListTile(
-            leading: IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut().then(
+            onTap: () {
+               FirebaseAuth.instance.signOut().then(
                       (value) => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => LoginPage(),
                         ),
                       ),
                     );
-              },
-              icon: Icon(
+            },
+            leading:Icon(
                 Icons.exit_to_app,
               ),
-            ),
+
             title: Text("Log out"),
           )
         ],

@@ -11,7 +11,7 @@ class TopPart extends StatelessWidget {
         Column(
           children: [
             Text(
-              "Welcome to testee",
+              "Welcome to OHEY",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

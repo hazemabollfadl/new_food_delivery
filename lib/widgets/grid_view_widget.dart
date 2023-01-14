@@ -10,8 +10,10 @@ import '../route/routing_page.dart';
 class GridViewWidget extends StatelessWidget {
   final String id;
   final String collection;
+  final String subCollection;
   const GridViewWidget({
     super.key,
+    required this.subCollection,
     required this.id,
     required this.collection,
   });
@@ -24,12 +26,12 @@ class GridViewWidget extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection("categories")
-            .doc(id)
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
             .collection(collection)
-            .get(),
+            .doc(id)
+            .collection(subCollection)
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -56,9 +58,10 @@ class GridViewWidget extends StatelessWidget {
                   ),
                 ),
               ),
+             snapshot.data!.docs.isEmpty?Text("No item"):
               GridView.builder(
                 shrinkWrap: true,
-                itemCount: snapshot.data?.docs.length,
+                itemCount: snapshot.data!.docs.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 0.4,
                   crossAxisCount: 2,
