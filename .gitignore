@@ -42,3 +42,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# dont check it into public source control 
+key.properties
+app/upload-keystore.jks
