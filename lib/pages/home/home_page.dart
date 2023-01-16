@@ -242,7 +242,7 @@ class _MyWidgetState extends State<HomePage> {
                       var varData =
                           searchfunction(query, streamSnapshort.data!.docs);
                       return result.isEmpty
-                          ? (Text("Not Found"))
+                          ? Center(child: (Text("Not Found")))
                           : GridView.builder(
                               shrinkWrap: true,
                               itemCount: result.length,
@@ -283,9 +283,8 @@ class _MyWidgetState extends State<HomePage> {
                                   productRate: data["productRate"],
                                   productOldPrice: data["productOldprice"],
                                 );
-                              });
-
-                      // ignore: dead_code
+                              },
+                            );
                     },
                   ),
                 ),
