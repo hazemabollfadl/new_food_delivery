@@ -12,9 +12,10 @@ import '../detailPage/details_page.dart';
 
 late UserModel userModel;
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+Size? size;
 
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
   @override
   State<HomePage> createState() => _MyWidgetState();
 }
@@ -61,7 +62,7 @@ class _MyWidgetState extends State<HomePage> {
           ),
         ),
         Container(
-          height: 150,
+          height: size!.height * 0.1 + 20,
           child: StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection("categories").snapshots(),
@@ -104,24 +105,23 @@ class _MyWidgetState extends State<HomePage> {
   Widget buildproduct(
       {required Stream<QuerySnapshot<Map<String, dynamic>>>? stream}) {
     return Container(
-      height: 280,
+      height: size!.height / 3 + 40,
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("products").snapshots(),
+        stream: stream,
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshort) {
           if (!streamSnapshort.hasData) {
             return Center(child: const CircularProgressIndicator());
           }
           var varData = searchfunction(query, streamSnapshort.data!.docs);
-          return GridView.builder(
+
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
             itemCount: streamSnapshort.data!.docs.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 5.0,
-              mainAxisSpacing: 5.0,
-            ),
             itemBuilder: (ctx, index) {
               var varData = searchfunction(query, streamSnapshort.data!.docs);
               var data = varData[index];
+              // var data = streamSnapshort.data!.docs[index];
 
               return SingleProduct(
                 onTap: () {
@@ -156,6 +156,7 @@ class _MyWidgetState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     getCurrentUserDataFunction();
     return Scaffold(
       drawer: BuildDrawer(),
@@ -166,7 +167,7 @@ class _MyWidgetState extends State<HomePage> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(0.0),
+            padding: const EdgeInsets.all(8.0),
             child: Material(
               elevation: 7,
               shadowColor: Colors.grey[300],
@@ -312,8 +313,7 @@ class categories extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(12.0),
-        height: 100,
-        width: 150,
+        width: size!.width / 7,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
