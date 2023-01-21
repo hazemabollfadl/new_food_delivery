@@ -62,8 +62,8 @@ class _SingleProductState extends State<SingleProduct> {
           Container(
             margin: EdgeInsets.all(12.0),
             alignment: Alignment.topRight,
-            height: 100,
-            width: 150,
+            height: size!.height * 0.3,
+            width: size!.width / 2 - 20,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,

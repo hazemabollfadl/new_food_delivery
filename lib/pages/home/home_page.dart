@@ -313,7 +313,7 @@ class categories extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(12.0),
-        width: size!.width / 7,
+        width: size!.width / 2 - 20,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
