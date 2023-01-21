@@ -17,6 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   String? token = await getfcmtoken();
+  print("OHEY" + token.toString());
   runApp(const MyApp());
 }
 
