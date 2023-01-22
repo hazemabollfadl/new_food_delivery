@@ -21,6 +21,10 @@ class _ProfilePageState extends State<ProfilePage> {
       TextEditingController(text: userModel.fullName);
   TextEditingController emailAddress =
       TextEditingController(text: userModel.emailAddress);
+  TextEditingController userLocation =
+      TextEditingController(text: userModel.userLocation);
+  TextEditingController phoneNum =
+      TextEditingController(text: userModel.phoneNum);
 
   Widget textFromField({required String hintText}) {
     return Container(
@@ -39,12 +43,14 @@ class _ProfilePageState extends State<ProfilePage> {
   void profilevalidation({
     required TextEditingController? emailAdress,
     required TextEditingController? fullName,
+    required TextEditingController? userLocation,
+    required TextEditingController? phoneNum,
     required BuildContext context,
   }) async {
     if (fullName!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Password is empty"),
+          content: Text("Full name is empty"),
         ),
       );
       return;
@@ -59,6 +65,18 @@ class _ProfilePageState extends State<ProfilePage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Enter a valid email address"),
+        ),
+      );
+    } else if (userLocation!.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("User Location is empty"),
+        ),
+      );
+    } else if (phoneNum!.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Phone Number is empty"),
         ),
       );
       return;
@@ -87,6 +105,14 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 10,
         ),
         textFromField(hintText: userModel.emailAddress),
+        SizedBox(
+          height: 10,
+        ),
+        textFromField(hintText: userModel.userLocation),
+        SizedBox(
+          height: 10,
+        ),
+        textFromField(hintText: userModel.phoneNum),
       ],
     );
   }
@@ -115,6 +141,18 @@ class _ProfilePageState extends State<ProfilePage> {
             hintText: "emailAddres",
           ),
         ),
+        TextFormField(
+          controller: userLocation,
+          decoration: InputDecoration(
+            hintText: "userLocation",
+          ),
+        ),
+        TextFormField(
+          controller: phoneNum,
+          decoration: InputDecoration(
+            hintText: "phoneNum",
+          ),
+        ),
         SizedBox(
           height: 10,
         ),
@@ -124,6 +162,8 @@ class _ProfilePageState extends State<ProfilePage> {
               context: context,
               emailAdress: emailAddress,
               fullName: fullName,
+              userLocation: userLocation,
+              phoneNum: phoneNum,
             );
           },
           text: "Up date",
@@ -140,6 +180,8 @@ class _ProfilePageState extends State<ProfilePage> {
       {
         "fullname": fullName.text,
         "emailAdress": emailAddress.text,
+        "userLocation": userLocation.text,
+        "phoneNum": phoneNum.text,
       },
     ).then(
       (value) => RoutingPage.goTonext(
