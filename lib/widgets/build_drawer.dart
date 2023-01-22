@@ -6,6 +6,7 @@ import 'package:new_food_delivery/pages/favorite/favorite_page.dart';
 import 'package:new_food_delivery/pages/home/home_page.dart';
 import 'package:new_food_delivery/pages/login/login_page.dart';
 import 'package:new_food_delivery/pages/profile/profile_page.dart';
+import 'package:new_food_delivery/pages/support/call_support.dart';
 import 'package:new_food_delivery/route/routing_page.dart';
 
 import '../appColors/app_colors.dart';
@@ -72,6 +73,15 @@ class BuildDrawer extends StatelessWidget {
               Icons.share_location_sharp,
             ),
             title: Text("My Order"),
+          ),
+          ListTile(
+            onTap: () {
+              RoutingPage.goTonext(context: context, navigateTo: CallSupport());
+            },
+            leading: Icon(
+              Icons.call,
+            ),
+            title: Text("Contact Support"),
           ),
           ListTile(
             onTap: () {
