@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_food_delivery/appColors/app_colors.dart';
+import 'package:new_food_delivery/pages/Payment/payment_interface.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
 import 'package:provider/provider.dart';
 
+import '../../route/routing_page.dart';
 import '../../widgets/single_cart_item.dart';
 import '../provider/cart_provider.dart';
 
@@ -92,8 +94,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
               cartProvider.getCartList.isEmpty
                   ? Text("")
                   : MyButton(
-                      onPressed: () => print("button"),
-                      text: "Buy",
+                      onPressed: () {
+                        RoutingPage.goTonext(
+                          context: context,
+                          navigateTo: PaymentInterface(),
+                        );
+                      },
+                      text: "Order",
                     )
             ],
           ),
