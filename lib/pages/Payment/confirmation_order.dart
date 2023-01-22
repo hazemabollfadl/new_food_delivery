@@ -46,7 +46,7 @@ class _ConfirmationOrderState extends State<ConfirmationOrder> {
                 children: [
                   Image(
                     image: NetworkImage(
-                      "https://thumbs.dreamstime.com/b/people-eating-healthy-meals-wooden-table-top-view-food-delivery-people-eating-healthy-meals-wooden-table-food-delivery-160387494.jpg",
+                      "https://cdn.pixabay.com/photo/2022/01/28/12/17/fast-food-6974507_1280.jpg",
                     ),
                   ),
                   SizedBox(
