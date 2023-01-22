@@ -18,6 +18,8 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController fullname = TextEditingController();
   TextEditingController emailAdress = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController userLocation = TextEditingController();
+  TextEditingController phoneNum = TextEditingController();
 
   bool visibility = true;
   @override
@@ -81,6 +83,8 @@ class _SignupPageState extends State<SignupPage> {
                               context: context,
                               emailAdress: emailAdress,
                               password: password,
+                              phoneNum: phoneNum,
+                              userLocation: userLocation,
                             );
                           },
                           text: "SIGN UP",

@@ -17,6 +17,8 @@ class SignupAuthProvider with ChangeNotifier {
     required TextEditingController fullname,
     required TextEditingController emailAdress,
     required TextEditingController password,
+    required TextEditingController userLocation,
+    required TextEditingController phoneNum,
     required BuildContext context,
   }) async {
     if (fullname!.text.trim().isEmpty) {
@@ -73,6 +75,8 @@ class SignupAuthProvider with ChangeNotifier {
             "emailAdress": emailAdress.text,
             "password": password.text,
             "userUid": userCredential!.user!.uid,
+            "userLocation": userLocation.text,
+            "phoneNum": phoneNum.text
           },
         ).then((value) {
           looding = false;
