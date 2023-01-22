@@ -38,12 +38,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
         centerTitle: true,
         title: Text(
           "Check out",
           style: TextStyle(
-            color: AppColors.kblackColor,
+            color: AppColors.kwhiteColor,
           ),
         ),
       ),

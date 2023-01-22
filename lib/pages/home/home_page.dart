@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/appColors/app_colors.dart';
 import 'package:new_food_delivery/model/user_model.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
 import 'package:new_food_delivery/widgets/grid_view_widget.dart';
@@ -56,7 +57,7 @@ class _MyWidgetState extends State<HomePage> {
             "categories ",
             style: TextStyle(
               fontSize: 20,
-              color: Color.fromARGB(255, 98, 21, 21),
+              color: AppColors.kblackColor,
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -162,7 +163,14 @@ class _MyWidgetState extends State<HomePage> {
       drawer: BuildDrawer(),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
+        title: Text(
+          "OHEY",
+          style: TextStyle(
+            color: AppColors.kwhiteColor,
+            fontSize: 25,
+          ),
+        ),
       ),
       body: ListView(
         children: [
@@ -198,7 +206,7 @@ class _MyWidgetState extends State<HomePage> {
                         "Products ",
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.grey,
+                          color: AppColors.kblackColor,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
@@ -213,7 +221,7 @@ class _MyWidgetState extends State<HomePage> {
                         "Best Sell ",
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.grey,
+                          color: AppColors.kblackColor,
                           fontWeight: FontWeight.normal,
                         ),
                       ),

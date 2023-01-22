@@ -41,12 +41,12 @@ class _PaymentInterfaceState extends State<PaymentInterface> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
         centerTitle: true,
         title: Text(
           "Payment",
           style: TextStyle(
-            color: AppColors.kblackColor,
+            color: AppColors.kwhiteColor,
           ),
         ),
       ),

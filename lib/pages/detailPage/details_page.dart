@@ -33,7 +33,13 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
+        title: Text(
+          "Item Details",
+          style: TextStyle(
+            color: AppColors.kwhiteColor,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

@@ -8,6 +8,8 @@ import 'package:new_food_delivery/pages/login/login_page.dart';
 import 'package:new_food_delivery/pages/profile/profile_page.dart';
 import 'package:new_food_delivery/route/routing_page.dart';
 
+import '../appColors/app_colors.dart';
+
 class BuildDrawer extends StatelessWidget {
   const BuildDrawer({Key? key}) : super(key: key);
   @override
@@ -18,7 +20,7 @@ class BuildDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.purple,
+              color: AppColors.kgradientk1,
             ), // BoxDecoration
             accountName: Text(userModel.fullName),
             accountEmail: Text(userModel.emailAddress),

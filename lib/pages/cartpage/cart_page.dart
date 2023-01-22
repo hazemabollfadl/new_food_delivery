@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/appColors/app_colors.dart';
 import 'package:new_food_delivery/pages/provider/cart_provider.dart';
 import 'package:new_food_delivery/route/routing_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
@@ -37,8 +38,14 @@ class _CartPageState extends State<CartPage> {
               },
             ),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
         elevation: 0,
+        title: Text(
+          "Your Cart",
+          style: TextStyle(
+            color: AppColors.kwhiteColor,
+          ),
+        ),
       ),
       body: cartProvider.getCartList.isEmpty
           ? Center(

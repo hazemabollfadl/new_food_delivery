@@ -26,12 +26,12 @@ class _ConfirmationOrderState extends State<ConfirmationOrder> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
         centerTitle: true,
         title: Text(
           "Order Proccessing",
           style: TextStyle(
-            color: AppColors.kblackColor,
+            color: AppColors.kwhiteColor,
           ),
         ),
       ),
@@ -40,7 +40,7 @@ class _ConfirmationOrderState extends State<ConfirmationOrder> {
               child: Text("No Products"),
             )
           : Container(
-              padding: EdgeInsets.only(top: 20),
+              // padding: EdgeInsets.only(top: 20),
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -50,28 +50,41 @@ class _ConfirmationOrderState extends State<ConfirmationOrder> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Center(
                     child: Text(
-                      "Your delicious Food is being prepared",
+                      "ORDER CONFIRMED!",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
                   ),
+                  Center(
+                    child: Text(
+                      "Your delicious Food is on the Way!",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.favorite_sharp,
+                    color: Colors.red[800],
+                  ),
                   SizedBox(
-                    height: 60,
+                    height: 50,
                   ),
                   Center(
                     child: LoadingAnimationWidget.discreteCircle(
                       color: AppColors.kgradientk1,
-                      size: 200,
+                      size: 120,
                     ),
                   ),
                   SizedBox(
-                    height: 91,
+                    height: 80,
                   ),
                   MyButton(
                     onPressed: () {

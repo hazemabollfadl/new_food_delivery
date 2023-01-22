@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_food_delivery/appColors/app_colors.dart';
 import 'package:new_food_delivery/pages/home/home_page.dart';
 import 'package:new_food_delivery/route/routing_page.dart';
 import 'package:new_food_delivery/widgets/my_button.dart';
@@ -196,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.kgradientk1,
         leading: isEdit
             ? IconButton(
                 onPressed: () {
