@@ -38,7 +38,7 @@ class FavoriteProvider extends ChangeNotifier {
         .collection("favorite")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection("userFavorite")
-        .doc(productID)
+        .doc("productID")
         .delete();
     notifyListeners();
   }
