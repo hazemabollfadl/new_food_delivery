@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:new_food_delivery/appColors/app_colors.dart';
 import 'package:new_food_delivery/model/user_model.dart';
 import 'package:new_food_delivery/widgets/build_drawer.dart';
+import 'package:new_food_delivery/widgets/my_button.dart';
 import '../../route/routing_page.dart';
 
 late UserModel userModel;
@@ -50,31 +51,33 @@ class _MyWidgetState extends State<HomePage> {
           ),
         ),
       ),
-      body: ListView(children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Material(
-            elevation: 7,
-            shadowColor: Colors.grey[300],
-            child: TextFormField(
-              onChanged: (value) {
-                setState(() {
-                  query = value;
-                });
-              },
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                fillColor: Colors.white,
-                hintText: "Search your product",
-                filled: true,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Material(
+              elevation: 7,
+              shadowColor: Colors.grey[300],
+              child: TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    query = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  fillColor: Colors.white,
+                  hintText: "Search your product",
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
